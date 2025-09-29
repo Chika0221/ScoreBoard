@@ -1,34 +1,30 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class DisplayPage extends StatefulWidget {
+// Package imports:
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
+import 'package:m_score_board/models/team.dart';
+import 'package:m_score_board/rank_card.dart';
+
+class DisplayPage extends HookConsumerWidget {
   const DisplayPage({super.key});
 
   @override
-  State<DisplayPage> createState() => _DisplayPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    String title = "得点";
 
-class _DisplayPageState extends State<DisplayPage> {
-  String title = "得点";
-
-  @override
-  void initState() {
-    super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text(title), centerTitle: true));
+    return Scaffold(
+      appBar: AppBar(title: Text(title), centerTitle: true),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(5, (index) {
+            return RankCard(team: Team(id: index, name: "", point: index * 3));
+          }),
+        ),
+      ),
+    );
   }
 }

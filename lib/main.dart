@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 // Project imports:
 import 'package:m_score_board/color.dart';
 import 'package:m_score_board/control_page.dart';
@@ -8,7 +11,8 @@ import 'package:m_score_board/display_page.dart';
 import 'package:m_score_board/select_page.dart';
 
 void main() {
-  runApp(MyApp());
+  final providerScope = ProviderScope(child: MyApp());
+  runApp(providerScope);
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.light,
-      theme: ThemeData(colorScheme: ScoreBoardColors().colorScheme),
+      theme: ThemeData(colorScheme: ScoreBoardColor().colorScheme),
       initialRoute: AppRoute.select.path,
       routes: {
         AppRoute.select.path: (context) => const SelectPage(),

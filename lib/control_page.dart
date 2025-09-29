@@ -40,7 +40,7 @@ class ControlPage extends StatelessWidget {
                     debugShowCheckedModeBanner: false,
                     themeMode: ThemeMode.light,
                     theme: ThemeData(
-                      colorScheme: ScoreBoardColors().colorScheme,
+                      colorScheme: ScoreBoardColor().colorScheme,
                     ),
                     home: DisplayPage(),
                     // ignore: deprecated_member_use
