@@ -15,6 +15,7 @@ class Display with _$Display {
     required bool nowDisplay,
     required String title,
     String? description,
+    // ignore: invalid_annotation_target
     @JsonKey(ignore: true) Stream<List<Team>>? teams,
   }) = _Display;
 

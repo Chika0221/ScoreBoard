@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/display_stream_provider.dart';
-import 'package:m_score_board/models/team.dart';
 import 'package:m_score_board/rank_card.dart';
 
 class DisplayPage extends HookConsumerWidget {
