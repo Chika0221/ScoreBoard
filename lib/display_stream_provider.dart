@@ -9,19 +9,20 @@ import 'package:m_score_board/models/team.dart';
 final displayStreamProvider = StreamProvider.autoDispose<List<Display>>((ref) {
   final collection = FirebaseFirestore.instance.collection("display");
 
-  final stream = collection.snapshots().asyncMap((querySnapshot) async {
-    return Future.wait(
-      querySnapshot.docs.map((doc) async {
+  final stream = collection.snapshots().map((querySnapshot) {
+    return querySnapshot.docs.map((doc) {
         final teamsCollection = doc.reference.collection("teams");
-        final teamsSnapshot = await teamsCollection.get();
-        final teams =
-            teamsSnapshot.docs
-                .map((teamDoc) => Team.fromJson(teamDoc.data()))
-                .toList();
+        final teamsSnapshots = teamsCollection.snapshots();
+        final teams = teamsSnapshots.map((snapshot) {
+          return snapshot.docs
+              .map((teamDoc) => Team.fromJson(teamDoc.data()))
+              .toList()
+            ..sort((a, b) => b.point.compareTo(a.point));
+        });
 
         return Display.fromJson(doc.data()).copyWith(teams: teams);
-      }).toList(),
-    );
+      }).toList()
+      ..sort((a, b) => a.id);
   });
 
   return stream;

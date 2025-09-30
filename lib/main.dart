@@ -26,7 +26,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.light,
-      theme: ThemeData(colorScheme: ScoreBoardColor().colorScheme),
+      theme: ThemeData(
+        colorScheme: ScoreBoardColor().colorScheme,
+        fontFamily: "Tsunagi",
+      ),
       initialRoute: AppRoute.select.path,
       routes: {
         AppRoute.select.path: (context) => const SelectPage(),

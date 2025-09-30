@@ -25,7 +25,8 @@ mixin _$Display {
   bool get nowDisplay => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  List<Team>? get teams => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  Stream<List<Team>>? get teams => throw _privateConstructorUsedError;
 
   /// Serializes this Display to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +47,7 @@ abstract class $DisplayCopyWith<$Res> {
     bool nowDisplay,
     String title,
     String? description,
-    List<Team>? teams,
+    @JsonKey(ignore: true) Stream<List<Team>>? teams,
   });
 }
 
@@ -97,7 +98,7 @@ class _$DisplayCopyWithImpl<$Res, $Val extends Display>
                 freezed == teams
                     ? _value.teams
                     : teams // ignore: cast_nullable_to_non_nullable
-                        as List<Team>?,
+                        as Stream<List<Team>>?,
           )
           as $Val,
     );
@@ -117,7 +118,7 @@ abstract class _$$DisplayImplCopyWith<$Res> implements $DisplayCopyWith<$Res> {
     bool nowDisplay,
     String title,
     String? description,
-    List<Team>? teams,
+    @JsonKey(ignore: true) Stream<List<Team>>? teams,
   });
 }
 
@@ -165,9 +166,9 @@ class __$$DisplayImplCopyWithImpl<$Res>
                     as String?,
         teams:
             freezed == teams
-                ? _value._teams
+                ? _value.teams
                 : teams // ignore: cast_nullable_to_non_nullable
-                    as List<Team>?,
+                    as Stream<List<Team>>?,
       ),
     );
   }
@@ -181,8 +182,8 @@ class _$DisplayImpl implements _Display {
     required this.nowDisplay,
     required this.title,
     this.description,
-    final List<Team>? teams,
-  }) : _teams = teams;
+    @JsonKey(ignore: true) this.teams,
+  });
 
   factory _$DisplayImpl.fromJson(Map<String, dynamic> json) =>
       _$$DisplayImplFromJson(json);
@@ -195,15 +196,9 @@ class _$DisplayImpl implements _Display {
   final String title;
   @override
   final String? description;
-  final List<Team>? _teams;
   @override
-  List<Team>? get teams {
-    final value = _teams;
-    if (value == null) return null;
-    if (_teams is EqualUnmodifiableListView) return _teams;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  @JsonKey(ignore: true)
+  final Stream<List<Team>>? teams;
 
   @override
   String toString() {
@@ -221,19 +216,13 @@ class _$DisplayImpl implements _Display {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(other._teams, _teams));
+            (identical(other.teams, teams) || other.teams == teams));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    nowDisplay,
-    title,
-    description,
-    const DeepCollectionEquality().hash(_teams),
-  );
+  int get hashCode =>
+      Object.hash(runtimeType, id, nowDisplay, title, description, teams);
 
   /// Create a copy of Display
   /// with the given fields replaced by the non-null parameter values.
@@ -255,7 +244,7 @@ abstract class _Display implements Display {
     required final bool nowDisplay,
     required final String title,
     final String? description,
-    final List<Team>? teams,
+    @JsonKey(ignore: true) final Stream<List<Team>>? teams,
   }) = _$DisplayImpl;
 
   factory _Display.fromJson(Map<String, dynamic> json) = _$DisplayImpl.fromJson;
@@ -269,7 +258,8 @@ abstract class _Display implements Display {
   @override
   String? get description;
   @override
-  List<Team>? get teams;
+  @JsonKey(ignore: true)
+  Stream<List<Team>>? get teams;
 
   /// Create a copy of Display
   /// with the given fields replaced by the non-null parameter values.

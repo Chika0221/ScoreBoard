@@ -15,7 +15,7 @@ class Display with _$Display {
     required bool nowDisplay,
     required String title,
     String? description,
-    List<Team>? teams,
+    @JsonKey(ignore: true) Stream<List<Team>>? teams,
   }) = _Display;
 
   // JSON変換のファクトリコンストラクタ

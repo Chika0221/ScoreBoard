@@ -7,6 +7,7 @@ import 'package:device_preview/device_preview.dart';
 // Project imports:
 import 'package:m_score_board/color.dart';
 import 'package:m_score_board/display_page.dart';
+import 'package:m_score_board/scripts/firebase_scripts.dart';
 
 class ControlPage extends StatelessWidget {
   const ControlPage({super.key});
@@ -24,6 +25,7 @@ class ControlPage extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -49,6 +51,41 @@ class ControlPage extends StatelessWidget {
             ),
           ),
           // Expanded(child: Container(color: Color(0xFF141218))),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FilledButton.tonal(
+                onPressed: () async {
+                  await FirestoreScripts().addPoint("0", 10);
+                },
+                child: Text("0"),
+              ),
+              FilledButton.tonal(
+                onPressed: () {
+                  FirestoreScripts().addPoint("1", 10);
+                },
+                child: Text("1"),
+              ),
+              FilledButton.tonal(
+                onPressed: () {
+                  FirestoreScripts().addPoint("2", 10);
+                },
+                child: Text("2"),
+              ),
+              FilledButton.tonal(
+                onPressed: () {
+                  FirestoreScripts().addPoint("3", 10);
+                },
+                child: Text("3"),
+              ),
+              FilledButton.tonal(
+                onPressed: () {
+                  FirestoreScripts().addPoint("4", 10);
+                },
+                child: Text("4"),
+              ),
+            ],
+          ),
         ],
       ),
     );

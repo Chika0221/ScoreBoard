@@ -23,11 +23,24 @@ class DisplayPage extends HookConsumerWidget {
       body: Center(
         child: displaysStream.when(
           data: (data) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(data[1].teams!.length, (index) {
-                return RankCard(team: data[1].teams![index]);
-              }),
+            return StreamBuilder(
+              stream: data[0].teams,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final teams = snapshot.data;
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(teams!.length, (index) {
+                      return RankCard(team: teams[index]);
+                    }),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text("チーム取得エラー"));
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
             );
           },
           error: (error, stackTrace) {
