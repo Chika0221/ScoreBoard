@@ -9,9 +9,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/color.dart';
-import 'package:m_score_board/control_page.dart';
-import 'package:m_score_board/display_page.dart';
 import 'package:m_score_board/firebase_options.dart';
+import 'package:m_score_board/pages/control_page/control_page.dart';
+import 'package:m_score_board/pages/display_page/display_page.dart';
 import 'package:m_score_board/select_page.dart';
 
 void main() async {

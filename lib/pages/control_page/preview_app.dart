@@ -1,4 +1,6 @@
 // Flutter imports:
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/color.dart';
-import 'package:m_score_board/display_page.dart';
+import 'package:m_score_board/pages/display_page/display_page.dart';
 
 class PreviewApp extends ConsumerWidget {
   const PreviewApp({super.key});
@@ -28,7 +30,10 @@ class PreviewApp extends ConsumerWidget {
             (context) => MaterialApp(
               debugShowCheckedModeBanner: false,
               themeMode: ThemeMode.light,
-              theme: ThemeData(colorScheme: ScoreBoardColor().colorScheme),
+              theme: ThemeData(
+                colorScheme: ScoreBoardColor().colorScheme,
+                fontFamily: "Tsunagi",
+              ),
               home: DisplayPage(),
               // ignore: deprecated_member_use
               useInheritedMediaQuery: true,

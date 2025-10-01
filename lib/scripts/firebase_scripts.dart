@@ -1,6 +1,9 @@
 // Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Project imports:
+import 'package:m_score_board/models/display.dart';
+
 class FirestoreScripts {
   final displayCollection = FirebaseFirestore.instance.collection("display");
 
@@ -21,5 +24,31 @@ class FirestoreScripts {
         await doc.reference.update({"nowDisplay": false});
       }
     }
+  }
+
+  Future<void> addDisplay(Display newDisplay) async {
+    await displayCollection
+        .doc("slide${newDisplay.id}")
+        .set(newDisplay.toJson());
+  }
+
+  Future<void> deleteDisplay(Display display) async {
+    final WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    final docToDeleteQuery =
+        await displayCollection.where("id", isEqualTo: display.id).get();
+    if (docToDeleteQuery.docs.isNotEmpty) {
+      batch.delete(docToDeleteQuery.docs.first.reference);
+    }
+
+    final docsToUpdateQuery =
+        await displayCollection.where("id", isGreaterThan: display.id).get();
+
+    for (final doc in docsToUpdateQuery.docs) {
+      final currentId = doc.data()["id"] as int;
+      batch.update(doc.reference, {"id": currentId - 1});
+    }
+
+    await batch.commit();
   }
 }
