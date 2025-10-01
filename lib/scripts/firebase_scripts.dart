@@ -11,4 +11,15 @@ class FirestoreScripts {
         .doc("team$teamId")
         .update({"point": FieldValue.increment(point)});
   }
+
+  Future<void> changeDisplay(int index) async {
+    final querySnapshot = await displayCollection.get();
+    for (final doc in querySnapshot.docs) {
+      if (doc.get("id") == index) {
+        await doc.reference.update({"nowDisplay": true});
+      } else {
+        await doc.reference.update({"nowDisplay": false});
+      }
+    }
+  }
 }

@@ -10,19 +10,21 @@ final displayStreamProvider = StreamProvider.autoDispose<List<Display>>((ref) {
   final collection = FirebaseFirestore.instance.collection("display");
 
   final stream = collection.snapshots().map((querySnapshot) {
-    return querySnapshot.docs.map((doc) {
-        final teamsCollection = doc.reference.collection("teams");
-        final teamsSnapshots = teamsCollection.snapshots();
-        final teams = teamsSnapshots.map((snapshot) {
-          return snapshot.docs
-              .map((teamDoc) => Team.fromJson(teamDoc.data()))
-              .toList()
-            ..sort((a, b) => b.point.compareTo(a.point));
-        });
+    final displays =
+        querySnapshot.docs.map((doc) {
+          final teamsCollection = doc.reference.collection("teams");
+          final teamsSnapshots = teamsCollection.snapshots();
+          final teams = teamsSnapshots.map((snapshot) {
+            return snapshot.docs
+                .map((teamDoc) => Team.fromJson(teamDoc.data()))
+                .toList()
+              ..sort((a, b) => b.point.compareTo(a.point));
+          });
 
-        return Display.fromJson(doc.data()).copyWith(teams: teams);
-      }).toList()
-      ..sort((a, b) => a.id);
+          return Display.fromJson(doc.data()).copyWith(teams: teams);
+        }).toList();
+    displays.sort((a, b) => a.id.compareTo(b.id));
+    return displays;
   });
 
   return stream;
