@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -21,7 +22,9 @@ class RankDisplayPage extends HookConsumerWidget {
         stream: display.teams,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final teams = snapshot.data;
+            final teams = snapshot.data!;
+
+            teams.sort((a, b) => b.point.compareTo(a.point));
 
             return Center(
               child: Row(

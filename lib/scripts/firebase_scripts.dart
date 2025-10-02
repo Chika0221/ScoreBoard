@@ -27,9 +27,7 @@ class FirestoreScripts {
   }
 
   Future<void> addDisplay(Display newDisplay) async {
-    await displayCollection
-        .doc("slide${newDisplay.id}")
-        .set(newDisplay.toJson());
+    await displayCollection.doc().set(newDisplay.toJson());
   }
 
   Future<void> deleteDisplay(Display display) async {
@@ -50,5 +48,11 @@ class FirestoreScripts {
     }
 
     await batch.commit();
+  }
+
+  Future<void> updateDisplay(Display display) async {
+    final query =
+        await displayCollection.where("id", isEqualTo: display.id).get();
+    query.docs.first.reference.update(display.toJson());
   }
 }

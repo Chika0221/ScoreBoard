@@ -15,7 +15,6 @@ class DisplayPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String title = "得点";
 
     final displaysStream = ref.watch(displayStreamProvider);
 

@@ -1,13 +1,4 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-// Project imports:
-import 'package:m_score_board/models/display.dart';
-import 'package:m_score_board/models/team.dart';
-import 'package:m_score_board/scripts/firebase_scripts.dart';
+part of 'control_page.dart';
 
 class ControlSetting extends ConsumerWidget {
   const ControlSetting({
@@ -31,6 +22,7 @@ class ControlSetting extends ConsumerWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Text("設定-${display.title}"),
@@ -49,7 +41,6 @@ class ControlSetting extends ConsumerWidget {
                 },
                 tooltip: "このスライドを削除",
               ),
-            if (display.id != 0) SizedBox(width: 16),
             Switch(
               activeTrackColor: Colors.pinkAccent,
               value: (display.nowDisplay),
@@ -60,6 +51,66 @@ class ControlSetting extends ConsumerWidget {
               },
             ),
             SizedBox(width: 16),
+          ],
+        ),
+        body:
+            (display.id == 0)
+                ? RankAddPointContainer(display: display)
+                : OtherDisplayContainer(display: display),
+      ),
+    );
+  }
+}
+
+class OtherDisplayContainer extends HookConsumerWidget {
+  const OtherDisplayContainer({super.key, required this.display});
+
+  final Display display;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final titleController = useTextEditingController(text: display.title);
+    final descriptionController = useTextEditingController(
+      text: display.description,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: InputDecoration(
+                labelText: "タイトル",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: descriptionController,
+              decoration: InputDecoration(
+                labelText: "説明",
+                border: OutlineInputBorder(),
+              ),
+              minLines: 1,
+              maxLines: 10,
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: () {
+                  FirestoreScripts().updateDisplay(
+                    display.copyWith(
+                      title: titleController.text,
+                      description: descriptionController.text,
+                    ),
+                  );
+                },
+                child: Text("変更を適用"),
+              ),
+            ),
           ],
         ),
       ),

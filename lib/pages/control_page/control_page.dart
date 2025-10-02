@@ -9,10 +9,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/display_stream_provider.dart';
+import 'package:m_score_board/models/display.dart';
 import 'package:m_score_board/pages/control_page/add_display_dialog.dart';
-import 'package:m_score_board/pages/control_page/control_setting.dart';
 import 'package:m_score_board/pages/control_page/preview_app.dart';
+import 'package:m_score_board/pages/control_page/rank_add_point_container.dart';
 import 'package:m_score_board/scripts/firebase_scripts.dart';
+
+part 'control_setting.dart';
 
 class ControlPage extends HookConsumerWidget {
   const ControlPage({super.key});
@@ -45,6 +48,7 @@ class ControllerWidget extends HookConsumerWidget {
     final displayStream = ref.watch(displayStreamProvider);
 
     return Container(
+      constraints: BoxConstraints(minHeight: 500),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         color: Theme.of(context).colorScheme.surface,
