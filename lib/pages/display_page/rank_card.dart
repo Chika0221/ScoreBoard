@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_network/image_network.dart';
 
 // Project imports:
 import 'package:m_score_board/models/team.dart';
@@ -26,15 +27,14 @@ class RankCard extends HookConsumerWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: SvgPicture.asset(
-              ScoreBoardTheme().customShapePaths[team.id],
-            ),
+          Spacer(),
+          Image.asset(
+            ScoreBoardTheme().customShapePaths[team.id],
+            height: MediaQuery.of(context).size.width * 0.06,
+            width: MediaQuery.of(context).size.width * 0.06,
           ),
+          Spacer(),
           SizedBox.square(
             dimension: MediaQuery.of(context).size.width * 0.18 - 32,
             child: Container(

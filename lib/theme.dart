@@ -29,11 +29,10 @@ class ScoreBoardTheme {
   ];
 
   final List<String> customShapePaths = [
-    "assets/icons/plus.svg",
-    "assets/icons/square.svg",
-    "assets/icons/star.svg",
-    // "assets/icons/wave.svg",
-    "assets/icons/circle.svg",
-    "assets/icons/triangle.svg",
+    "assets/icons/plus.png",
+    "assets/icons/star.png",
+    "assets/icons/triangle.png",
+    "assets/icons/wind.png",
+    "assets/icons/circle.png",
   ];
 }

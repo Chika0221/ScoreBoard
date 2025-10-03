@@ -46,6 +46,7 @@ dependencies:
   cloud_firestore: ^6.0.2
   flutter_launcher_icons: ^0.14.4
   flutter_animate: ^4.5.2
+  image_network: ^2.6.0
 
 dev_dependencies:
   flutter_test:
