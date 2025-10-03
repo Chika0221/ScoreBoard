@@ -8,8 +8,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:m_score_board/color.dart';
 import 'package:m_score_board/pages/display_page/display_page.dart';
+import 'package:m_score_board/theme.dart';
 
 class PreviewApp extends ConsumerWidget {
   const PreviewApp({super.key});
@@ -17,8 +17,8 @@ class PreviewApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width * 0.8,
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: DevicePreview(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         isToolbarVisible: true,
@@ -31,7 +31,7 @@ class PreviewApp extends ConsumerWidget {
               debugShowCheckedModeBanner: false,
               themeMode: ThemeMode.light,
               theme: ThemeData(
-                colorScheme: ScoreBoardColor().colorScheme,
+                colorScheme: ScoreBoardTheme().colorScheme,
                 fontFamily: "Tsunagi",
               ),
               home: DisplayPage(),

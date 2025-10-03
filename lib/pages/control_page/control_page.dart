@@ -33,7 +33,7 @@ class ControlPage extends HookConsumerWidget {
         foregroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Column(
-        children: [PreviewApp(), Expanded(child: ControllerWidget())],
+        children: [PreviewApp(), ControllerWidget()],
       ),
     );
   }
@@ -48,9 +48,10 @@ class ControllerWidget extends HookConsumerWidget {
     final displayStream = ref.watch(displayStreamProvider);
 
     return Container(
-      constraints: BoxConstraints(minHeight: 500),
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16),bottom: Radius.circular(16)),
         color: Theme.of(context).colorScheme.surface,
       ),
       padding: EdgeInsets.all(16),

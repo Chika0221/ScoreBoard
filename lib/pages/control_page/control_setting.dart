@@ -79,6 +79,7 @@ class OtherDisplayContainer extends HookConsumerWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 16),
             TextField(
               controller: titleController,
               decoration: InputDecoration(

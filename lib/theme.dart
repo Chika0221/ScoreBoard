@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-class ScoreBoardColor {
+class ScoreBoardTheme {
   final colorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: Colors.black,
@@ -20,11 +20,20 @@ class ScoreBoardColor {
   final customColor4 = Colors.orange.withAlpha(180);
   final customColor5 = Colors.purple.withAlpha(180);
 
-  final customColors = [
+  final List<Color> customColors = [
     Colors.red.withAlpha(180),
     Colors.blue.withAlpha(180),
     Colors.green.withAlpha(180),
     Colors.orange.withAlpha(180),
     Colors.purple.withAlpha(180),
+  ];
+
+  final List<String> customShapePaths = [
+    "assets/icons/plus.svg",
+    "assets/icons/square.svg",
+    "assets/icons/star.svg",
+    // "assets/icons/wave.svg",
+    "assets/icons/circle.svg",
+    "assets/icons/triangle.svg",
   ];
 }

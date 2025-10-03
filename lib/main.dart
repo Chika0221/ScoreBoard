@@ -8,11 +8,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:m_score_board/color.dart';
 import 'package:m_score_board/firebase_options.dart';
 import 'package:m_score_board/pages/control_page/control_page.dart';
 import 'package:m_score_board/pages/display_page/display_page.dart';
 import 'package:m_score_board/select_page.dart';
+import 'package:m_score_board/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: ThemeData(
-        colorScheme: ScoreBoardColor().colorScheme,
+        colorScheme: ScoreBoardTheme().colorScheme,
         fontFamily: "Tsunagi",
       ),
       initialRoute: AppRoute.select.path,

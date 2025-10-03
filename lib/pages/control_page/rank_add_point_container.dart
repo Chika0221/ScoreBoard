@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:m_score_board/color.dart';
 import 'package:m_score_board/models/display.dart';
 import 'package:m_score_board/scripts/firebase_scripts.dart';
+import 'package:m_score_board/theme.dart';
 
 class RankAddPointContainer extends HookConsumerWidget {
   const RankAddPointContainer({super.key, required this.display});
@@ -38,7 +38,7 @@ class RankAddPointContainer extends HookConsumerWidget {
                 return Container(
                   decoration: ShapeDecoration(
                     shape: StadiumBorder(),
-                    color: ScoreBoardColor().customColors[index],
+                    color: ScoreBoardTheme().customColors[index],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

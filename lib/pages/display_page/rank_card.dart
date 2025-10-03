@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:m_score_board/color.dart';
 import 'package:m_score_board/models/team.dart';
+import 'package:m_score_board/theme.dart';
 
 class RankCard extends HookConsumerWidget {
   const RankCard({super.key, required this.team});
@@ -21,12 +22,19 @@ class RankCard extends HookConsumerWidget {
       width: MediaQuery.of(context).size.width * 0.18,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: ScoreBoardColor().customColors[team.id],
+        color: ScoreBoardTheme().customColors[team.id],
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          SizedBox(
+            width: 48,
+            height: 48,
+            child: SvgPicture.asset(
+              ScoreBoardTheme().customShapePaths[team.id],
+            ),
+          ),
           SizedBox.square(
             dimension: MediaQuery.of(context).size.width * 0.18 - 32,
             child: Container(
