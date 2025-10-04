@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/display_stream_provider.dart';
-import 'package:m_score_board/pages/display_page/rank_card.dart';
 import 'package:m_score_board/pages/display_page/rank_display_page.dart';
 import 'package:m_score_board/pages/display_page/slide_display_page.dart';
 
