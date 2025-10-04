@@ -21,6 +21,7 @@ class RankAddPointContainer extends HookConsumerWidget {
         stream: display.teams,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
+            print(snapshot.data);
             return CircularProgressIndicator();
           }
           if (snapshot.hasError) {

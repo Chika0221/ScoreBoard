@@ -24,12 +24,10 @@ class RankDisplayPage extends HookConsumerWidget {
           if (snapshot.hasData) {
             final teams = snapshot.data!;
 
-            teams.sort((a, b) => b.point.compareTo(a.point));
-
-            return Center(
+            return SizedBox.expand(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: List.generate(teams!.length, (index) {
                   return RankCard(team: teams[index]);
                 }),

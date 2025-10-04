@@ -101,11 +101,18 @@ class OtherDisplayContainer extends HookConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: FilledButton(
-                onPressed: () {
-                  FirestoreScripts().updateDisplay(
+                onPressed: () async {
+                  await FirestoreScripts().updateDisplay(
                     display.copyWith(
                       title: titleController.text,
                       description: descriptionController.text,
+                    ),
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("変更を適応しました"),
+                      backgroundColor: Colors.pinkAccent,
                     ),
                   );
                 },

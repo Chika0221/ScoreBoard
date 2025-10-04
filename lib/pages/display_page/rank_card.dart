@@ -9,6 +9,7 @@ import 'package:image_network/image_network.dart';
 
 // Project imports:
 import 'package:m_score_board/models/team.dart';
+import 'package:m_score_board/rank_provider.dart';
 import 'package:m_score_board/theme.dart';
 
 class RankCard extends HookConsumerWidget {
@@ -18,42 +19,65 @@ class RankCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
-      width: MediaQuery.of(context).size.width * 0.18,
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: ScoreBoardTheme().customColors[team.id],
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-          Spacer(),
-          Image.asset(
-            ScoreBoardTheme().customShapePaths[team.id],
-            height: MediaQuery.of(context).size.width * 0.06,
-            width: MediaQuery.of(context).size.width * 0.06,
+    final rank = ref.watch(RankProvider)[team.id];
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.6,
+          width: MediaQuery.of(context).size.width * 0.18,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: ScoreBoardTheme().customColors[team.id],
+            borderRadius: BorderRadius.circular(20),
           ),
-          Spacer(),
-          SizedBox.square(
-            dimension: MediaQuery.of(context).size.width * 0.18 - 32,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Theme.of(context).colorScheme.surface,
+          child: Column(
+            children: [
+              Spacer(),
+              Image.asset(
+                ScoreBoardTheme().customShapePaths[team.id],
+                height: MediaQuery.of(context).size.width * 0.06,
+                width: MediaQuery.of(context).size.width * 0.06,
               ),
-              child: Center(
-                child: Text(
-                  team.point.toString(),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.displayLarge?.copyWith(fontSize: 100),
+              Spacer(),
+              SizedBox.square(
+                dimension: MediaQuery.of(context).size.width * 0.18 - 32,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  child: Center(
+                    child: Text(
+                      team.point.toString(),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayLarge?.copyWith(fontSize: 100),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        SizedBox(height: 16),
+        AnimatedContainer(
+          duration: Duration(seconds: 2),
+          height:
+              MediaQuery.of(context).size.height *
+              0.3 /
+              ((team.point != 0)
+                  ? ((rank < 4) ? (rank) : double.infinity)
+                  : double.infinity),
+          width: MediaQuery.of(context).size.width * 0.18,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            color: ScoreBoardTheme().rankColor[rank - 1],
+          ),
+          child: Center(child: Text("$rank", style: TextStyle(fontSize: 50))),
+        ),
+      ],
     );
   }
 }

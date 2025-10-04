@@ -35,4 +35,12 @@ class ScoreBoardTheme {
     "assets/icons/wind.png",
     "assets/icons/circle.png",
   ];
+
+  final List<Color> rankColor = [
+    const Color(0xFFFFD700), // Gold
+    const Color(0xFFC0C0C0), // Silver
+    const Color(0xFFCD7F32), // Bronze
+    Colors.transparent,
+    Colors.transparent,
+  ];
 }

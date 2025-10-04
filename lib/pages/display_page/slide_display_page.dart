@@ -16,40 +16,33 @@ class SlideDisplayPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(64),
+        padding: EdgeInsets.fromLTRB(64, 32, 64, 64),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 120,
-                  width: 12,
-                  color: Theme.of(context).colorScheme.secondary,
+            Text(display.title, style: TextStyle(fontSize: 100)),
+            SizedBox(height: 32),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Colors.amber, width: 5),
                 ),
-                SizedBox(width: 16),
-                Text(display.title, style: TextStyle(fontSize: 100)),
-              ],
-            ),
-            SizedBox(height: 64),
-            Row(
-              children: [
-                SizedBox(width: 48),
-                Text(
-                  display.description!,
-                  style: Theme.of(context).textTheme.headlineLarge,
+                child: Center(
+                  child: Text(
+                    display.description!,
+                    style: TextStyle(fontSize: 80),
+                  ),
                 ),
-              ],
+              ),
             ),
-            // Center(
-            //   child: Text(
-            //     display.description!,
-            //     style: Theme.of(context).textTheme.headlineLarge,
-            //   ),
+            // Row(
+            //   children: [
+            //     SizedBox(width: 48),
+            //     Text(display.description!, style: TextStyle(fontSize: 60)),
+            //   ],
             // ),
           ],
         ),

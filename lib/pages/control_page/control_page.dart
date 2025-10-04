@@ -32,9 +32,7 @@ class ControlPage extends HookConsumerWidget {
         backgroundColor: backColor,
         foregroundColor: Theme.of(context).colorScheme.surface,
       ),
-      body: Column(
-        children: [PreviewApp(), ControllerWidget()],
-      ),
+      body: Column(children: [PreviewApp(), ControllerWidget()]),
     );
   }
 }
@@ -51,7 +49,10 @@ class ControllerWidget extends HookConsumerWidget {
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16),bottom: Radius.circular(16)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16),
+          bottom: Radius.circular(16),
+        ),
         color: Theme.of(context).colorScheme.surface,
       ),
       padding: EdgeInsets.all(16),
@@ -90,17 +91,30 @@ class ControllerWidget extends HookConsumerWidget {
                           ),
                           width: double.infinity,
                           child: ListTile(
-                            onTap: () {
+                            onTap: () async {
+                              if (index == 0 && displayData.nowDisplay) {
+                                await FirestoreScripts().changeDisplay(100);
+                              }
                               listSelected.value = index;
+                              if (index == 0 && displayData.nowDisplay) {
+                                await FirestoreScripts().changeDisplay(0);
+                              }
                             },
                             title: Text(displayData.title),
+                            subtitle:
+                                (displayData.nowDisplay)
+                                    ? Text(
+                                      "表示中",
+                                      style: TextStyle(
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
+                                    : null,
                             trailing: Switch(
                               activeTrackColor: Colors.pinkAccent,
-                              value: (displayData.nowDisplay),
+                              value: displayData.nowDisplay,
                               onChanged: (value) {
-                                if (value) {
-                                  FirestoreScripts().changeDisplay(index);
-                                }
+                                FirestoreScripts().changeDisplay(index);
                               },
                             ),
                           ),
