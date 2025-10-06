@@ -30,40 +30,5 @@ class DisplayPage extends HookConsumerWidget {
       error: (error, stackTrace) => Center(child: Text("${error}")),
       loading: () => Center(child: CircularProgressIndicator()),
     );
-
-    // return Scaffold(
-    //   appBar: AppBar(title: Text(title), centerTitle: true),
-    //   body: Center(
-    //     child: displaysStream.when(
-    //       data: (data) {
-    //         return StreamBuilder(
-    //           stream: data[0].teams,
-    //           builder: (context, snapshot) {
-    //             if (snapshot.hasData) {
-    //               final teams = snapshot.data;
-
-    //               return Row(
-    //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //                 children: List.generate(teams!.length, (index) {
-    //                   return RankCard(team: teams[index]);
-    //                 }),
-    //               );
-    //             } else if (snapshot.hasError) {
-    //               return Center(child: Text("チーム取得エラー"));
-    //             } else {
-    //               return CircularProgressIndicator();
-    //             }
-    //           },
-    //         );
-    //       },
-    //       error: (error, stackTrace) {
-    //         return Center(child: Text("通信エラー$error"));
-    //       },
-    //       loading: () {
-    //         return Center(child: CircularProgressIndicator());
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 }

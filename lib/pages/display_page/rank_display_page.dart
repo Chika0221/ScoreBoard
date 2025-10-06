@@ -23,12 +23,28 @@ class RankDisplayPage extends HookConsumerWidget {
           if (snapshot.hasData) {
             final teams = snapshot.data!;
 
+            final rank = List.filled(5, 4);
+
+            final sortedTeams = List.of(teams)
+              ..sort((a, b) => b.point.compareTo(a.point));
+
+            // Assign ranks based on the sorted order, handling ties
+            for (int i = 0; i < sortedTeams.length; i++) {
+              if (i > 0 && sortedTeams[i].point == sortedTeams[i - 1].point) {
+                // Same score as the previous team, so same rank
+                rank[sortedTeams[i].id] = rank[sortedTeams[i - 1].id];
+              } else {
+                // Different score, rank is the current position (i + 1)
+                rank[sortedTeams[i].id] = i + 1;
+              }
+            }
+
             return SizedBox.expand(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: List.generate(teams.length, (index) {
-                  return RankCard(team: teams[index]);
+                  return RankCard(team: teams[index], rank: rank[index]);
                 }),
               ),
             );

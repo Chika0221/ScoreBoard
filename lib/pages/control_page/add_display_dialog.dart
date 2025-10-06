@@ -49,6 +49,7 @@ class AddDisplayDialog extends HookConsumerWidget {
               nowDisplay: false,
               title: titleController.text,
               description: descriptionController.text,
+              type: DisplayType.slideString,
             );
             await FirestoreScripts().addDisplay(newDisplay);
             Navigator.of(context).pop();

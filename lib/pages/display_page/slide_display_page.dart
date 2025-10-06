@@ -31,10 +31,13 @@ class SlideDisplayPage extends HookConsumerWidget {
                   border: Border.all(color: Colors.amber, width: 5),
                 ),
                 child: Center(
-                  child: Text(
-                    display.description!,
-                    style: TextStyle(fontSize: 80),
-                  ),
+                  child:
+                      (display.type == DisplayType.slideString)
+                          ? Text(
+                            display.description!,
+                            style: TextStyle(fontSize: 80),
+                          )
+                          : Image.network(display.description!),
                 ),
               ),
             ),

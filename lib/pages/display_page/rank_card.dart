@@ -6,18 +6,29 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/models/team.dart';
-import 'package:m_score_board/rank_provider.dart';
 import 'package:m_score_board/theme.dart';
 
 class RankCard extends HookConsumerWidget {
-  const RankCard({super.key, required this.team});
+  const RankCard({super.key, required this.team, required this.rank});
 
   final Team team;
+  final int rank;
+
+  double _calculatePodiumHeight(BuildContext context) {
+    const baseHeight = 0.3;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // ポイントが0より大きく、ランクが1位から3位までの場合に表彰台を表示
+    if (team.point > 0 && rank > 0 && rank < 4) {
+      return screenHeight * baseHeight / rank;
+    }
+
+    // 上記以外の場合は高さを0にする
+    return 0.0;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rank = ref.watch(RankProvider)[team.id];
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -61,12 +72,7 @@ class RankCard extends HookConsumerWidget {
         SizedBox(height: 16),
         AnimatedContainer(
           duration: Duration(seconds: 2),
-          height:
-              MediaQuery.of(context).size.height *
-              0.3 /
-              ((team.point != 0)
-                  ? ((rank < 4) ? (rank) : double.infinity)
-                  : double.infinity),
+          height: _calculatePodiumHeight(context),
           width: MediaQuery.of(context).size.width * 0.18,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),

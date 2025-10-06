@@ -14,6 +14,7 @@ class Display with _$Display {
     required int id,
     required bool nowDisplay,
     required String title,
+    required DisplayType type,
     String? description,
     // ignore: invalid_annotation_target
     @JsonKey(ignore: true) Stream<List<Team>>? teams,
@@ -23,3 +24,5 @@ class Display with _$Display {
   factory Display.fromJson(Map<String, dynamic> json) =>
       _$DisplayFromJson(json);
 }
+
+enum DisplayType { rank, slideString, slideImage }

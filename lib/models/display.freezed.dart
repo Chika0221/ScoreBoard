@@ -24,7 +24,9 @@ mixin _$Display {
   int get id => throw _privateConstructorUsedError;
   bool get nowDisplay => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  DisplayType get type => throw _privateConstructorUsedError;
+  String? get description =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   Stream<List<Team>>? get teams => throw _privateConstructorUsedError;
 
@@ -46,6 +48,7 @@ abstract class $DisplayCopyWith<$Res> {
     int id,
     bool nowDisplay,
     String title,
+    DisplayType type,
     String? description,
     @JsonKey(ignore: true) Stream<List<Team>>? teams,
   });
@@ -69,6 +72,7 @@ class _$DisplayCopyWithImpl<$Res, $Val extends Display>
     Object? id = null,
     Object? nowDisplay = null,
     Object? title = null,
+    Object? type = null,
     Object? description = freezed,
     Object? teams = freezed,
   }) {
@@ -89,6 +93,11 @@ class _$DisplayCopyWithImpl<$Res, $Val extends Display>
                     ? _value.title
                     : title // ignore: cast_nullable_to_non_nullable
                         as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as DisplayType,
             description:
                 freezed == description
                     ? _value.description
@@ -117,6 +126,7 @@ abstract class _$$DisplayImplCopyWith<$Res> implements $DisplayCopyWith<$Res> {
     int id,
     bool nowDisplay,
     String title,
+    DisplayType type,
     String? description,
     @JsonKey(ignore: true) Stream<List<Team>>? teams,
   });
@@ -139,6 +149,7 @@ class __$$DisplayImplCopyWithImpl<$Res>
     Object? id = null,
     Object? nowDisplay = null,
     Object? title = null,
+    Object? type = null,
     Object? description = freezed,
     Object? teams = freezed,
   }) {
@@ -159,6 +170,11 @@ class __$$DisplayImplCopyWithImpl<$Res>
                 ? _value.title
                 : title // ignore: cast_nullable_to_non_nullable
                     as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as DisplayType,
         description:
             freezed == description
                 ? _value.description
@@ -181,6 +197,7 @@ class _$DisplayImpl implements _Display {
     required this.id,
     required this.nowDisplay,
     required this.title,
+    required this.type,
     this.description,
     @JsonKey(ignore: true) this.teams,
   });
@@ -195,14 +212,17 @@ class _$DisplayImpl implements _Display {
   @override
   final String title;
   @override
+  final DisplayType type;
+  @override
   final String? description;
+  // ignore: invalid_annotation_target
   @override
   @JsonKey(ignore: true)
   final Stream<List<Team>>? teams;
 
   @override
   String toString() {
-    return 'Display(id: $id, nowDisplay: $nowDisplay, title: $title, description: $description, teams: $teams)';
+    return 'Display(id: $id, nowDisplay: $nowDisplay, title: $title, type: $type, description: $description, teams: $teams)';
   }
 
   @override
@@ -214,6 +234,7 @@ class _$DisplayImpl implements _Display {
             (identical(other.nowDisplay, nowDisplay) ||
                 other.nowDisplay == nowDisplay) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.teams, teams) || other.teams == teams));
@@ -222,7 +243,7 @@ class _$DisplayImpl implements _Display {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, nowDisplay, title, description, teams);
+      Object.hash(runtimeType, id, nowDisplay, title, type, description, teams);
 
   /// Create a copy of Display
   /// with the given fields replaced by the non-null parameter values.
@@ -243,6 +264,7 @@ abstract class _Display implements Display {
     required final int id,
     required final bool nowDisplay,
     required final String title,
+    required final DisplayType type,
     final String? description,
     @JsonKey(ignore: true) final Stream<List<Team>>? teams,
   }) = _$DisplayImpl;
@@ -256,7 +278,9 @@ abstract class _Display implements Display {
   @override
   String get title;
   @override
-  String? get description;
+  DisplayType get type;
+  @override
+  String? get description; // ignore: invalid_annotation_target
   @override
   @JsonKey(ignore: true)
   Stream<List<Team>>? get teams;
