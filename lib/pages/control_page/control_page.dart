@@ -129,16 +129,33 @@ class ControllerWidget extends HookConsumerWidget {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: FilledButton.icon(
-                      onPressed:
-                          () => showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AddDisplayDialog(newId: data.length);
-                            },
-                          ),
-                      icon: Icon(Icons.add),
-                      label: Text("新しいスライドを追加"),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FilledButton.icon(
+                          onPressed:
+                              () => showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AddDisplayDialog(newId: data.length);
+                                },
+                              ),
+                          icon: Icon(Icons.add),
+                          label: Text("新しいスライドを追加"),
+                        ),
+                        SizedBox(width: 8),
+                        FilledButton.icon(
+                          onPressed:
+                              () => showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AddDisplayDialog(newId: data.length);
+                                },
+                              ),
+                          icon: Icon(Icons.add),
+                          label: Text("新しいスライドを追加"),
+                        ),
+                      ],
                     ),
                   ),
                 ],

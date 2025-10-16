@@ -36,7 +36,6 @@ class ControlSetting extends ConsumerWidget {
                 icon: Icon(Icons.delete),
                 onPressed: () async {
                   await FirestoreScripts().deleteDisplay(display);
-                  // 削除後はリストに戻る
                   backButton();
                 },
                 tooltip: "このスライドを削除",
