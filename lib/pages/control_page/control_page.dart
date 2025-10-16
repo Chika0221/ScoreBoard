@@ -74,8 +74,10 @@ class ControllerWidget extends HookConsumerWidget {
                         final displayData = data[index];
                         return Container(
                           padding: EdgeInsets.all(16),
+
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
+
                             border:
                                 (displayData.nowDisplay)
                                     ? Border.all(

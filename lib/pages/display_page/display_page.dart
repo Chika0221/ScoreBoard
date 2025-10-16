@@ -2,26 +2,34 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:m_score_board/display_stream_provider.dart';
+import 'package:m_score_board/models/display.dart';
 import 'package:m_score_board/pages/display_page/rank_display_page.dart';
 import 'package:m_score_board/pages/display_page/slide_display_page.dart';
+
+// Package imports:
+
 
 class DisplayPage extends HookConsumerWidget {
   const DisplayPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final displaysStream = ref.watch(displayStreamProvider);
 
     return displaysStream.when(
       data: (data) {
-        final display = data.where((display) => display.nowDisplay).first;
+        final Display? display = data.firstWhereOrNull(
+          (display) => display.nowDisplay,
+        );
 
-        if (display.id == 0) {
+        if (display == null) {
+          return Center(child: CircularProgressIndicator());
+        } else if (display.id == 0) {
           return RankDisplayPage(display: display);
         } else {
           return SlideDisplayPage(display: display);

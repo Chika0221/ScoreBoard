@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:m_score_board/firebase_options.dart';
 import 'package:m_score_board/pages/control_page/control_page.dart';
 import 'package:m_score_board/pages/display_page/display_page.dart';
-import 'package:m_score_board/select_page.dart';
+import 'package:m_score_board/pages/select_page/select_page.dart';
 import 'package:m_score_board/theme.dart';
 
 void main() async {
