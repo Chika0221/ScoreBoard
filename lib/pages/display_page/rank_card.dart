@@ -1,10 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 // Project imports:
 import 'package:m_score_board/models/team.dart';
 import 'package:m_score_board/theme.dart';
