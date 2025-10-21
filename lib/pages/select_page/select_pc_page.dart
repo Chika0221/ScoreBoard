@@ -15,15 +15,29 @@ class SelectPcPage extends HookConsumerWidget {
       children: [
         Expanded(
           child: Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.2,
-              // height: MediaQuery.of(context).size.width * 0.1,
-              child: FilledButton.icon(
-                onPressed:
-                    () =>
-                        Navigator.of(context).pushNamed(AppRoute.display.path),
-                icon: Icon(Icons.arrow_forward),
-                label: Text("得点表へ"),
+            child: Focus(
+              autofocus: true,
+              onKeyEvent: (node, event) {
+                final key = event.logicalKey;
+                if (event is KeyDownEvent) {
+                  if (key == LogicalKeyboardKey.arrowRight) {
+                    Navigator.of(context).pushNamed(AppRoute.display.path);
+                  }
+                }
+
+                return KeyEventResult.ignored;
+              },
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                // height: MediaQuery.of(context).size.width * 0.1,
+                child: FilledButton.icon(
+                  onPressed:
+                      () => Navigator.of(
+                        context,
+                      ).pushNamed(AppRoute.display.path),
+                  icon: Icon(Icons.arrow_forward),
+                  label: Text("得点表へ"),
+                ),
               ),
             ),
           ),
